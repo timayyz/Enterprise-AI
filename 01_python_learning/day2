@@ -1,0 +1,13 @@
+hotel_name = "Qingdao Hotel"
+rating = 5
+customer = "Tom"
+print("Hotel Name:",hotel_name)
+print("Rating:",rating)
+print("Customer:",customer)
+
+
+rating_list=[5,4,3,5,3,4,2]
+print("rating list:",rating_list)
+
+average=sum(rating_list)/len(rating_list)
+print("average rating:",average)
