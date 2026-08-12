@@ -1,0 +1,8 @@
+customer_id,rating_score,service_level,room_type
+a,5.0,excellent,deluxe
+b,4.0,good,standard
+c,4.333333333333333,excellent,deluxe
+d,3.0,excellent,standard
+e,5.0,bad,deluxe
+f,4.0,good,deluxe
+g,5.0,excellent,standard

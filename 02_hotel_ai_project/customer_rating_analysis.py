@@ -14,7 +14,7 @@ rating_map = {
 }
 df=pd.DataFrame(data)
 df["service_rating"]=df["service_level"].map(rating_map)
-print(df)
+#print(df)
 
 
 
@@ -29,9 +29,9 @@ print("Score:", best_customer["rating_score"])
 print("Service:", best_customer["service_level"])
 
 service_analysis = df.groupby("service_level")["rating_score"].mean()
-print(service_analysis)   
+#print(service_analysis)   
 room_analysis = df.groupby("room_type")["rating_score"].mean()
-print(room_analysis)
+#print(room_analysis)
 
 def classify_customer(rating_score):
     if rating_score >= 4:
