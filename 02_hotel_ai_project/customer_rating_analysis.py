@@ -12,42 +12,57 @@ rating_map = {
     "average": 3,
     "bad": 2
 }
+# 1. Data Preparation
+
 df=pd.DataFrame(data)
-df["service_rating"]=df["service_level"].map(rating_map)
-#print(df)
 
-
-
-print("Average rating:",df["rating_score"].mean())
-print("Average service rating:",df["service_rating"].mean())
-print("Highest rating customer:",df.loc[df["rating_score"].idxmax()]["customer_id"])
-
-best_customer = df.loc[df["rating_score"].idxmax()]
-
-print("Best customer:", best_customer["customer_id"])
-print("Score:", best_customer["rating_score"])
-print("Service:", best_customer["service_level"])
-
-service_analysis = df.groupby("service_level")["rating_score"].mean()
-#print(service_analysis)   
-room_analysis = df.groupby("room_type")["rating_score"].mean()
-#print(room_analysis)
+# 2. Customer Classification
 
 def classify_customer(rating_score):
     if rating_score >= 4:
         return "VIP"
     else:
         return "Normal"
+
+print("Average rating:",df["rating_score"].mean())
+best_customer = df.loc[df["rating_score"].idxmax()]
+print("Best customer:", best_customer["customer_id"])
+print("Service:", best_customer["service_level"])
 df["customer_type"] = df["rating_score"].apply(classify_customer)
 print(df[["customer_id", "rating_score", "customer_type"]])
 
+# 3. Basic Statistical Analysis
 
-print(df["customer_type"].value_counts())
-if best_customer["rating_score"] >= 4:
-    print("Status: VIP")
-else:
-    print("Status: Normal")
+print(df.describe())
 
+# 4. Service Level Analysis
 
+# Convert service level into numerical rating
+df["service_rating"]=df["service_level"].map(rating_map)
+service_analysis = df.groupby(
+    "service_level"
+)["rating_score"].mean()
 
-print("Insight: Excellent service has the highest customer satisfaction.")
+print(service_analysis)
+
+# 5. Room Type Analysis
+
+room_analysis=df.groupby(
+    "room_type"
+)["rating_score"].mean()
+
+print(room_analysis)
+
+# 6. Customer Type Analysis
+
+customer_analysis = df.groupby("customer_type")["rating_score"].mean()
+
+print(customer_analysis)
+
+# 7. Advanced Analysis
+
+room_customer_analysis = df.groupby(
+    ["room_type","customer_type"]
+)["rating_score"].mean()
+
+print(room_customer_analysis)
